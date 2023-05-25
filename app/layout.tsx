@@ -1,4 +1,3 @@
-"use client"
 import { Menu } from '@/components/navbar/Menu';
 import './globals.css'
 import { Inter } from 'next/font/google'
