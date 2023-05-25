@@ -29,14 +29,7 @@ const handler = NextAuth({
         })
 
     ],
-    session:
-    {
-        strategy: 'jwt'
-    },
-    pages:
-    {
-        signIn: '/login'
-    },
+
     //Callbacks
     callbacks: {
         async jwt({ token, account, user }) {
