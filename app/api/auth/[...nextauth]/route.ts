@@ -4,6 +4,7 @@ import NextAuth, { Awaitable, User } from "next-auth"
 import GithubProvider from "next-auth/providers/github"
 import Credentials from "next-auth/providers/credentials"
 import { IniciarSesion } from "@/helpers/ApiLogin";
+import Cookies from "js-cookie";
 const handler = NextAuth({
     // Configure one or more authentication providers
     providers: [
@@ -20,7 +21,9 @@ const handler = NextAuth({
             async authorize(credentials, req) {
                 let respuesta = await IniciarSesion(credentials)
                 if (respuesta) {
-                    return respuesta.data
+                    console.log(respuesta)
+                    Cookies.set("token", respuesta.token)
+                    return respuesta
                 } else {
                     alert("Error")
                 }
@@ -33,8 +36,6 @@ const handler = NextAuth({
     //Callbacks
     callbacks: {
         async jwt({ token, account, user }) {
-            //console.log(token, account, user)
-            console.log(user)
             if (account) {
                 token.accessToken = account.access_token
                 switch (account.type) {
@@ -43,10 +44,12 @@ const handler = NextAuth({
                         break;
                 }
             }
+            console.log(token)
             return token
         },
         async session({ session, token }: { session: any, token: any }) {
             session.user = token.user as any;
+            console.log(session)
             return session
         }
     }
