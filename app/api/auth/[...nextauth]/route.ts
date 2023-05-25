@@ -7,10 +7,10 @@ import { IniciarSesion } from "@/helpers/ApiLogin";
 const handler = NextAuth({
     // Configure one or more authentication providers
     providers: [
-        GithubProvider({
+        /*GithubProvider({
             clientId: "4073e5b9a9463b3d3e08",
             clientSecret: "cacdb62bccf6c41b32b8a1c059411c8218d28a01",
-        }),
+        }),*/
         Credentials({
             name: 'Custom Login',
             credentials: {
